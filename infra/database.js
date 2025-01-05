@@ -23,6 +23,9 @@ async function getNewClient() {
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
     ssl: getSSLValues(),
+    // ssl: {
+    //   rejectUnauthorized: false,
+    // },
   });
 
   await client.connect();
@@ -35,7 +38,7 @@ const database = {
 };
 
 export default database;
-
+//todo: get ssl
 function getSSLValues() {
   if (process.env.POSTGRES_CA) {
     return {
