@@ -22,10 +22,10 @@ async function getNewClient() {
     user: process.env.POSTGRES_USER,
     database: process.env.POSTGRES_DB,
     password: process.env.POSTGRES_PASSWORD,
-    // ssl: getSSLValues(),
-    ssl: {
-      rejectUnauthorized: false,
-    },
+    ssl: getSSLValues(),
+    // ssl: {
+    //   rejectUnauthorized: false,
+    // },
   });
 
   await client.connect();
@@ -38,13 +38,13 @@ const database = {
 };
 
 export default database;
-// todo: get ssl
-// function getSSLValues() {
-//   if (process.env.POSTGRES_CA) {
-//     return {
-//       ca: process.env.POSTGRES_CA,
-//     };
-//   }
+//todo: get ssl
+function getSSLValues() {
+  if (process.env.POSTGRES_CA) {
+    return {
+      ca: process.env.POSTGRES_CA,
+    };
+  }
 
-//   return process.env.NODE_ENV === "production" ? true : false;
-// }
+  return process.env.NODE_ENV === "production" ? true : false;
+}
